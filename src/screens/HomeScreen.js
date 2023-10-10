@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, TextInput } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import {
   widthPercentageToDP as wp,
@@ -44,6 +44,23 @@ const HomeScreen = () => {
           >
             stay at <Text className="text-amber-400">home</Text>
           </Text>
+        </View>
+
+        {/* search bar */}
+        <View className=" flex-row items-center mx-4 rounded-full bg-black/5 p-[6px]">
+          <TextInput
+            placeholder="Search any recipe"
+            placeholderTextColor={"gray"}
+            style={{ fontSize: hp(1.7) }}
+            className="flex-1 pl-3 tracking-wider mb-2 text-base"
+          />
+          <View className="rounded-full p-3 bg-white">
+            <Icons.MagnifyingGlassIcon
+              size={hp(2.7)}
+              color="gray"
+              strokeWidth={3}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>
