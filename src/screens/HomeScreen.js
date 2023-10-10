@@ -6,8 +6,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import * as Icons from "react-native-heroicons/outline";
+import categories from "../components/Categories";
+import Categories from "../components/Categories";
 
-const HomeScreen = () => {
+export default function HomeScreen() {
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="dark" />
@@ -62,9 +64,10 @@ const HomeScreen = () => {
             />
           </View>
         </View>
+        <View>
+          <Categories />
+        </View>
       </ScrollView>
     </View>
   );
-};
-
-export default HomeScreen;
+}
