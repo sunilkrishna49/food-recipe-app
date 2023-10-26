@@ -44,6 +44,17 @@ export default function RecipeDetailsScreen(props) {
     }
   };
 
+  const ingredientIndexes = (meal) => {
+    if (!meal) return [];
+    let indexes = [];
+    for (let i = 0; i <= 20; i++) {
+      if (meal["strIngredient" + i]) {
+        indexes.push(i);
+      }
+    }
+    return indexes;
+  };
+
   return (
     <ScrollView
       className="bg-white flex-1"
@@ -51,6 +62,7 @@ export default function RecipeDetailsScreen(props) {
       contentContainerStyle={{ paddingBottom: 30 }}
     >
       <StatusBar style={"light"} />
+
       {/* recipe image */}
       <View className="flex-row justify-center">
         <Image
@@ -58,6 +70,7 @@ export default function RecipeDetailsScreen(props) {
           style={{ width: wp(98), height: hp(50), borderRadius: 53 }}
         ></Image>
       </View>
+
       {/* back button */}
       <View className="w-full absolute flex-row justify-between items-center pt-14">
         <TouchableOpacity
@@ -77,6 +90,7 @@ export default function RecipeDetailsScreen(props) {
           />
         </TouchableOpacity>
       </View>
+
       {/* meal description */}
       {loading ? (
         <Loading size="large" className="mt-16" />
@@ -98,6 +112,7 @@ export default function RecipeDetailsScreen(props) {
               {meal?.strArea}
             </Text>
           </View>
+
           {/* misc */}
           <View className="flex-row justify-around">
             <View className="flex rounded-full bg-amber-300 p-2">
@@ -177,7 +192,7 @@ export default function RecipeDetailsScreen(props) {
                   color="#525252"
                 />
               </View>
-              <View className="flex items-center py-2 space-y-1">
+              <View className="flex-1 items-center py-2 space-y-1">
                 <Text
                   style={{ fontSize: hp(2) }}
                   className="font-bold text-neutral-700"
@@ -191,6 +206,67 @@ export default function RecipeDetailsScreen(props) {
               </View>
             </View>
           </View>
+
+          {/* ingredients */}
+          <View className="space-y-4">
+            <Text
+              style={{ fontSize: hp(2.5) }}
+              className="flex-1 font-bold text-neutral-700"
+            >
+              Ingredients
+            </Text>
+            <View className="space-y-2 ml-3">
+              {ingredientIndexes(meal).map((i) => {
+                return (
+                  <View key={i} className="flex-row space-x-4 ">
+                    <View
+                      style={{ height: hp(1.5), width: hp(1.5) }}
+                      className="bg-amber-300 rounded-full"
+                    ></View>
+                    <View className="flex-row space-x-2">
+                      <Text
+                        style={{ fontSize: hp(1.7) }}
+                        className="font-extrabold text-neutral-700"
+                      >
+                        {meal["strMeasure" + i]}
+                      </Text>
+                      <Text
+                        style={{ fontSize: hp(1.7) }}
+                        className="font-medium text-neutral-600"
+                      >
+                        {meal["strIngredient" + i]}
+                      </Text>
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+
+          {/* instructions */}
+          <View className="space-y-4">
+            <Text
+              style={{ fontSize: hp(2.5) }}
+              className="flex-1 font-bold text-neutral-700"
+            >
+              Instructions
+            </Text>
+            <Text style={{ fontSize: hp(1.6) }} className="text-neutral-700">
+              {meal?.strInstructions}
+            </Text>
+          </View>
+
+          {/* Recipe Video */}
+          {meal.strYoutube && (
+            <View className="space-y-4">
+              <Text
+                style={{ fontSize: hp(2.5) }}
+                className="text-neutral-700 flex-1 font-bold"
+              >
+                Recipe Video
+              </Text>
+            </View>
+          )}
         </View>
       )}
     </ScrollView>
