@@ -17,6 +17,7 @@ import { HeartIcon } from "react-native-heroicons/solid";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Loading from "../components/Loading";
+import YoutubeIframe from "react-native-youtube-iframe";
 
 export default function RecipeDetailsScreen(props) {
   let item = props.route.params;
@@ -53,6 +54,15 @@ export default function RecipeDetailsScreen(props) {
       }
     }
     return indexes;
+  };
+
+  const getYoutubeVideoId = (url) => {
+    const regex = /[?&]v=([^&]+)/;
+    const match = url.match(regex);
+    if (match && match[1]) {
+      return match[1];
+    }
+    return null;
   };
 
   return (
@@ -265,6 +275,12 @@ export default function RecipeDetailsScreen(props) {
               >
                 Recipe Video
               </Text>
+              <View>
+                <YoutubeIframe
+                  videoId={getYoutubeVideoId(meal.strYoutube)}
+                  height={hp(30)}
+                ></YoutubeIframe>
+              </View>
             </View>
           )}
         </View>
