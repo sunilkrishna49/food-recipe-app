@@ -69,6 +69,7 @@ const RecipeCard = ({ item, index, navigation }) => {
             borderRadius: 35,
           }}
           className="bg-black/5"
+          sharedTransitionTag={item.strMealThumb}
         ></Image>
         <Text
           style={{ fontSize: hp(1.5) }}
