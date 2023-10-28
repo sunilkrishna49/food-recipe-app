@@ -10,7 +10,6 @@ import {
   ClockIcon,
   FireIcon,
   Square3Stack3DIcon,
-  Squares2X2Icon,
   UsersIcon,
 } from "react-native-heroicons/outline";
 import { HeartIcon } from "react-native-heroicons/solid";
@@ -19,9 +18,15 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import YoutubeIframe from "react-native-youtube-iframe";
 import Animated, { FadeInDown, FadeIn } from "react-native-reanimated";
+import { WebView } from "react-native-webview";
+import { Platform } from "react-native";
+import * as Linking from "expo-linking";
+
+const ios = Platform.OS == "ios";
 
 export default function RecipeDetailsScreen(props) {
-  let item = props.route.params;
+  const { route } = props;
+  const item = route.params;
   const navigation = useNavigation();
   const [isFavourite, setIsFavourite] = useState(false);
   const [meal, setMeal] = useState(null);
@@ -66,6 +71,9 @@ export default function RecipeDetailsScreen(props) {
     return null;
   };
 
+  const handleOpenLink = (url) => {
+    Linking.openURL(url);
+  };
   return (
     <ScrollView
       className="bg-white flex-1"
@@ -302,15 +310,30 @@ export default function RecipeDetailsScreen(props) {
             >
               <Text
                 style={{ fontSize: hp(2.5) }}
-                className="text-neutral-700 flex-1 font-bold"
+                className="font-bold flex-1 text-neutral-700"
               >
                 Recipe Video
               </Text>
               <View>
-                <YoutubeIframe
-                  videoId={getYoutubeVideoId(meal.strYoutube)}
-                  height={hp(30)}
-                />
+                {/* YoutubeIframe uses webview and it does not work properly on android (until its fixed we'll just show the video on ios) */}
+                {ios ? (
+                  <YouTubeIframe
+                    webViewProps={{
+                      overScrollMode: "never", // a fix for webview on android - which didn't work :(
+                    }}
+                    videoId={getYoutubeVideoId(meal.strYoutube)}
+                    height={hp(30)}
+                  />
+                ) : (
+                  <TouchableOpacity
+                    className="mb-5"
+                    onPress={() => handleOpenLink(meal.strYoutube)}
+                  >
+                    <Text className="text-blue-600" style={{ fontSize: hp(2) }}>
+                      {meal.strYoutube}
+                    </Text>
+                  </TouchableOpacity>
+                )}
               </View>
             </Animated.View>
           )}

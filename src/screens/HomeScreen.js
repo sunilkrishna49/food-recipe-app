@@ -78,14 +78,14 @@ export default function HomeScreen() {
               style={{ fontSize: hp(3.8) }}
               className="text-neutral-600 font-semibold"
             >
-              Make your own food,{" "}
+              Homemade Happiness:{" "}
             </Text>
           </View>
           <Text
             style={{ fontSize: hp(3.8) }}
             className="font-semibold text-neutral-600"
           >
-            stay at <Text className="text-amber-400">home</Text>
+            Cook, Stay, <Text className="text-amber-400">Enjoy</Text>
           </Text>
         </View>
 

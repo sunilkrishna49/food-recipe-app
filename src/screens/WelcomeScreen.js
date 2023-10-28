@@ -47,16 +47,16 @@ export default function WelcomeScreen() {
       {/* title and punch line */}
       <View className="flex items-center space-y-2">
         <Text
-          style={{ fontSize: hp(7) }}
+          style={{ fontSize: hp(5) }}
           className="font-bold text-white tracking-widest"
         >
-          Foody
+          Dinning Dreams
         </Text>
         <Text
           style={{ fontSize: hp(2) }}
           className="font-medium text-white  tracking-widest"
         >
-          Food is always right
+          Your Recipe Aventure Begins
         </Text>
       </View>
     </View>
