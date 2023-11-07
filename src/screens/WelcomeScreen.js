@@ -27,7 +27,7 @@ export default function WelcomeScreen() {
   });
 
   return (
-    <View className="flex-1 justify-center items-center space-y-10  bg-amber-500">
+    <View className="flex-1 justify-center items-center space-y-10  bg-black">
       <StatusBar style="light" />
       {/* logo image with rings */}
       <Animated.View
@@ -39,8 +39,8 @@ export default function WelcomeScreen() {
           style={{ padding: ring2padding }}
         >
           <Image
-            source={require("../../assets/images/welcome.png")}
-            style={{ width: hp(20), height: hp(20) }}
+            source={require("../../assets/images/shopping.jpg")}
+            style={{ width: hp(40), height: hp(40) }}
           />
         </Animated.View>
       </Animated.View>
@@ -50,13 +50,13 @@ export default function WelcomeScreen() {
           style={{ fontSize: hp(5) }}
           className="font-bold text-white tracking-widest"
         >
-          Dinning Dreams
+          Insta-Ebay
         </Text>
         <Text
           style={{ fontSize: hp(2) }}
           className="font-medium text-white  tracking-widest"
         >
-          Your Recipe Aventure Begins
+          Your Shopping Aventure Begins
         </Text>
       </View>
     </View>
